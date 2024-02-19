@@ -1,4 +1,4 @@
-package com.v.waltersmarket.data
+package com.v.waltersmarket.data.response
 
 data class WesternHoroscopeResponse(
     val planets: List<Planet>?,
