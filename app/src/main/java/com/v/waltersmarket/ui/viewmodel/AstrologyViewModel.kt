@@ -2,7 +2,7 @@ package com.v.waltersmarket.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.v.waltersmarket.requestdata.WesternHoroscopeRequestData
+import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.data.repository.AstrologyRepository
 import com.v.waltersmarket.ui.model.Planet
 import kotlinx.coroutines.flow.MutableStateFlow

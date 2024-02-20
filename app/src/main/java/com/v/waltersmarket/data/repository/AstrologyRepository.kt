@@ -1,7 +1,7 @@
 package com.v.waltersmarket.data.repository
 
 import com.v.waltersmarket.data.authmanager.AstrologyAuthenticationManager
-import com.v.waltersmarket.requestdata.WesternHoroscopeRequestData
+import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.data.network.AstrologyClientProvider
 import com.v.waltersmarket.data.network.AstrologyNetworkDataSource
 import com.v.waltersmarket.data.response.WesternHoroscopeResponse

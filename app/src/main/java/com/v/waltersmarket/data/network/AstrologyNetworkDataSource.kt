@@ -1,6 +1,6 @@
 package com.v.waltersmarket.data.network
 
-import com.v.waltersmarket.requestdata.WesternHoroscopeRequestData
+import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.data.response.WesternHoroscopeResponse
 
 interface AstrologyNetworkDataSource {
