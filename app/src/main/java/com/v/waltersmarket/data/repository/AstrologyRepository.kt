@@ -1,6 +1,7 @@
 package com.v.waltersmarket.data.repository
 
 import com.v.waltersmarket.data.authmanager.AstrologyAuthenticationManager
+import com.v.waltersmarket.data.authmanager.Authentication
 import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.data.network.AstrologyClientProvider
 import com.v.waltersmarket.data.network.AstrologyNetworkDataSource
@@ -12,10 +13,11 @@ import kotlinx.coroutines.withContext
 class AstrologyRepositoryImpl(
     private val ioDispatchers: CoroutineDispatcher,
     private val astrologyDataSource: AstrologyNetworkDataSource,
+    private val authentication: Authentication,
 ) : AstrologyRepository {
-    private val authentication = AstrologyAuthenticationManager.getCredentials()
+
     override suspend fun getWesternHoroscope(body: WesternHoroscopeRequestData) = withContext(ioDispatchers) {
-        astrologyDataSource.getWesternHoroscope(authentication, body)
+        astrologyDataSource.getWesternHoroscope(authentication.getCredentials(), body)
     }
 }
 
@@ -26,6 +28,7 @@ interface AstrologyRepository {
 object AstrologyRepositoryFactory {
     fun getAstrologyRepository() : AstrologyRepository = AstrologyRepositoryImpl(
         ioDispatchers = Dispatchers.IO,
-        astrologyDataSource = AstrologyClientProvider
+        astrologyDataSource = AstrologyClientProvider,
+        authentication = AstrologyAuthenticationManager
     )
 }
