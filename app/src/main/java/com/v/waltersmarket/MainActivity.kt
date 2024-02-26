@@ -3,6 +3,7 @@ package com.v.waltersmarket
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -10,24 +11,55 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.ui.theme.WaltersMarketTheme
+import com.v.waltersmarket.ui.viewmodel.AstrologyViewModelFactory
 
 class MainActivity : ComponentActivity() {
+
+    private val viewModel = AstrologyViewModelFactory().getAstrologyViewModel()
+
+    private val requestData = WesternHoroscopeRequestData(
+        day = "23",
+        month = "06",
+        year = "1995",
+        lon = "77.43",
+        lat = "18.63",
+        tzone = "5.5",
+        hour = "12",
+        min = "50",
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.fetchWesternHoroscopeData(requestData)
         setContent {
             WaltersMarketTheme {
+                val data = viewModel.planets.collectAsStateWithLifecycle()
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                   Column(
+                       modifier = Modifier.fillMaxSize()
+                   ) {
+                       data.value.forEach {
+                           Text(text = it.name!!)
+                       }
+                   }
                 }
             }
         }
     }
+
+    private fun subscribeToObservables() {
+
+    }
 }
+
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
