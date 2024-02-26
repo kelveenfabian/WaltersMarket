@@ -2,18 +2,18 @@ package com.v.waltersmarket.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.data.repository.AstrologyRepository
+import com.v.waltersmarket.data.requestdata.WesternHoroscopeRequestData
 import com.v.waltersmarket.ui.model.Planet
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class AstrologyViewModel(private val astrologyRepository: AstrologyRepository) : ViewModel() {
 
     private val _planets = MutableStateFlow<List<Planet>>(emptyList())
-    val planets: StateFlow<List<Planet>>
-        get() = _planets
+    val planets: StateFlow<List<Planet>> = _planets.asStateFlow()
 
     fun fetchWesternHoroscopeData(requestData: WesternHoroscopeRequestData) {
         viewModelScope.launch {
