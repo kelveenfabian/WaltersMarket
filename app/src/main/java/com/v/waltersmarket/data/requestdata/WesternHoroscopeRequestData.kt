@@ -1,4 +1,4 @@
-package com.v.waltersmarket.requestdata
+package com.v.waltersmarket.data.requestdata
 
 data class WesternHoroscopeRequestData(
     val day: String,
